@@ -1,0 +1,58 @@
+<div class="mat-elevation-z8">
+  <mat-progress-bar
+    *ngIf="isLoading"
+    mode="indeterminate"
+    color="warn"
+  ></mat-progress-bar>
+  <mat-form-field>
+    <input
+      matInput
+      (keyup)="applyFilter($event)"
+      placeholder="Search for a comic"
+      autocomplete="off"
+    />
+  </mat-form-field>
+  <mat-table #table [dataSource]="dataSource" matSort>
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <img [src]="element.image.icon_url" />
+        {{ element.name }}({{ element.origin ? element.origin.name : "NA" }})
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="real_name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        Real Name
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        {{ element.real_name ? element.real_name : "-" }}
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="deck">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        Description
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <span class="deck">{{ element.deck ? element.deck : "" }}</span>
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="action">
+      <mat-header-cell *matHeaderCellDef>
+        Action
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <button
+          mat-icon-button
+          routerLink="/comics/view-comic"
+          [queryParams]="{ url: element.api_detail_url }"
+        >
+          <mat-icon color="accent">remove_red_eye</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  </mat-table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</div>

@@ -1,0 +1,12 @@
+<mat-toolbar color="primary" class="mat-elevation-z5">
+  <img
+    src="https://static.comicvine.com/uploads/original/0/3437/1055657-logocv.png"
+  />COMIC BOOK
+  <span class="spacer"></span>
+  <button mat-icon-button (click)="logout()">
+    <mat-icon>power_settings_new</mat-icon>
+  </button>
+</mat-toolbar>
+<main>
+  <router-outlet></router-outlet>
+</main>

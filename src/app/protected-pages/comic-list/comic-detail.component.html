@@ -1,0 +1,83 @@
+<mat-card>
+  <mat-card-header class="card-header">{{
+    comicDetail && comicDetail.name | uppercase
+  }}</mat-card-header>
+  <mat-progress-bar
+    *ngIf="isLoading"
+    mode="indeterminate"
+    color="warn"
+  ></mat-progress-bar>
+  <div class="flex" *ngIf="comicDetail">
+    <div class="flex-child-1">
+      <img [src]="comicDetail.image.original_url" />
+    </div>
+    <div class="flex-child-2">
+      <span class="deck">{{ comicDetail.deck }}</span>
+    </div>
+  </div>
+  <mat-divider></mat-divider>
+  <div class="character-flex">
+    <div class="flex-child-1">
+      <mat-list role="list">
+        <div class="list-header">CHARACTER FRIENDS</div>
+        <mat-list-item
+          *ngFor="let friend of comicDetail && comicDetail.character_friends"
+          >{{ friend.name }}
+          <mat-divider></mat-divider>
+        </mat-list-item>
+      </mat-list>
+    </div>
+    <div class="flex-child-2">
+      <mat-list role="list">
+        <div class="list-header">CHARACTER ENEMIES</div>
+        <mat-list-item
+          *ngFor="let friend of comicDetail && comicDetail.character_enemies"
+          >{{ friend.name }} <mat-divider></mat-divider
+        ></mat-list-item>
+      </mat-list>
+    </div>
+  </div>
+  <mat-divider></mat-divider>
+  <div class="character-flex">
+    <div class="flex-child-1">
+      <mat-list role="list">
+        <div class="list-header">TEAM FRIENDS</div>
+        <mat-list-item
+          *ngFor="let friend of comicDetail && comicDetail.team_friends"
+          >{{ friend.name }}
+          <mat-divider></mat-divider>
+        </mat-list-item>
+      </mat-list>
+    </div>
+    <div class="flex-child-2">
+      <mat-list role="list">
+        <div class="list-header">TEAM ENEMIES</div>
+        <mat-list-item
+          *ngFor="let friend of comicDetail && comicDetail.team_enemies"
+          >{{ friend.name }} <mat-divider></mat-divider
+        ></mat-list-item>
+      </mat-list>
+    </div>
+  </div>
+  <mat-divider></mat-divider>
+  <div class="character-flex">
+    <div class="flex-child-1">
+      <mat-list role="list">
+        <div class="list-header">POWERS</div>
+        <mat-list-item *ngFor="let power of comicDetail && comicDetail.powers"
+          >{{ power.name }}
+          <mat-divider></mat-divider>
+        </mat-list-item>
+      </mat-list>
+    </div>
+    <div class="flex-child-2">
+      <mat-list role="list">
+        <div class="list-header">TEAMS</div>
+        <mat-list-item *ngFor="let team of comicDetail && comicDetail.teams"
+          >{{ team.name }} <mat-divider></mat-divider
+        ></mat-list-item>
+      </mat-list>
+    </div>
+  </div>
+</mat-card>
+<div [innerHTML]="comicDetail && comicDetail.description"></div>
